@@ -1,4 +1,5 @@
 import pygame
+import pygame.mixer
 import random
 import time
 import sys
@@ -6,6 +7,8 @@ import sys
 # Initialize all pygame modules
 pygame.init()
 
+# Initialize the mixer module
+pygame.mixer.init()
 
 # Game window setup
 windowWidth = 500
@@ -82,6 +85,10 @@ def gameOver():
     windowScreen.blit(scoreeSurface, scoreeRect)
     # Update the display
     pygame.display.flip()
+    # Load the sound file
+    gameOverSound = pygame.mixer.Sound('res/GameOverSound.mp3')
+    # Play the sound
+    gameOverSound.play()
     # Wait for 3 seconds before quitting
     time.sleep(3)
     # Quit pygame and terminate the script
@@ -140,6 +147,10 @@ while True:
     if snakePosition[0] == fruitPosition[0] and snakePosition[1] == fruitPosition[1]:
         score += 1
         fruitSpawn = False
+        # Load the sound file
+        gameOverSound = pygame.mixer.Sound('res/EatSound.mp3')
+        # Play the sound
+        gameOverSound.play()
     else:
         snakeBody.pop()
 		
