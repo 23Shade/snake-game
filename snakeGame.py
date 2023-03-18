@@ -153,11 +153,14 @@ while True:
         gameOverSound.play()
     else:
         snakeBody.pop()
-		
+
+    # Finds a valid spawn for the fruit and prevents the fruit to spawn on the snake's body	
     if not fruitSpawn:
         fruitPosition = [random.randrange(1, (windowWidth//10)) * 10,
-						random.randrange(1, (windowHeight//10)) * 10]
-		
+                        random.randrange(1, (windowHeight//10)) * 10]
+        while fruitPosition in snakeBody:
+            fruitPosition = [random.randrange(1, (windowWidth//10)) * 10,
+                            random.randrange(1, (windowHeight//10)) * 10]
     fruitSpawn = True
     windowScreen.fill(black)
 	
@@ -169,6 +172,7 @@ while True:
         appleImg = pygame.transform.scale(appleImg, (10, 10)) 
         # Draw the apple image on the screen
         windowScreen.blit(appleImg, (fruitPosition[0], fruitPosition[1])) 
+
 
     # Game Over conditions
     # Touching the edge of the screen (Wall Collision)
