@@ -162,10 +162,13 @@ while True:
     windowScreen.fill(black)
 	
     for pos in snakeBody:
-        pygame.draw.rect(windowScreen, pink,
-						pygame.Rect(pos[0], pos[1], 10, 10))
-    pygame.draw.rect(windowScreen, red, pygame.Rect(
-		fruitPosition[0], fruitPosition[1], 10, 10))
+        pygame.draw.rect(windowScreen, pink, pygame.Rect(pos[0], pos[1], 10, 10))
+        # Load apple image with alpha channel
+        appleImg = pygame.image.load('res/apple.png').convert_alpha() 
+        # Scale down the apple image to 10x10 pixels
+        appleImg = pygame.transform.scale(appleImg, (10, 10)) 
+        # Draw the apple image on the screen
+        windowScreen.blit(appleImg, (fruitPosition[0], fruitPosition[1])) 
 
     # Game Over conditions
     # Touching the edge of the screen (Wall Collision)
