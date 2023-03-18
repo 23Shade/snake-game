@@ -144,7 +144,7 @@ while True:
 	# if fruits and snakes collide then scores
 	# will be incremented by 10
     snakeBody.insert(0, list(snakePosition))
-    if snakePosition[0] == fruitPosition[0] and snakePosition[1] == fruitPosition[1]:
+    if (abs(snakePosition[0] - fruitPosition[0]) < 10) and (abs(snakePosition[1] - fruitPosition[1]) < 10):
         score += 1
         fruitSpawn = False
         # Load the sound file
