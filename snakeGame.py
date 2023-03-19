@@ -18,12 +18,10 @@ pygame.display.set_caption('Snake Game by Shade')
 
 # Colors
 # RGB tuples
-black = (7, 7, 7)
+black = (0, 0, 0)
 white = (255, 255, 255)
 red = (255, 0, 0)
 pink = (231, 97, 247)
-
-pygame.init()
 
 # Clock object for FPS
 fps = pygame.time.Clock()
@@ -47,6 +45,59 @@ fruitPosition = [random.randrange(1, (windowWidth//10)) * 10,
 				random.randrange(1, (windowHeight//10)) * 10]
 # Initial Score
 score = 0
+
+# Load menu images
+menuBackground = pygame.image.load('res/MenuBackground.png')
+menuApples = pygame.image.load('res/MenuApples.png')
+menuClouds = pygame.image.load('res/MenuClouds.png')
+menuEnter = pygame.image.load('res/MenuEnter.png')
+menuTitle = pygame.image.load('res/MenuTitle.png')
+
+# Scale down the menu images
+# 951 x 951 px original size
+scaleFactor = min(windowWidth / 951, windowHeight / 951)
+
+menuBackground = pygame.transform.scale(menuBackground, (windowWidth, windowHeight))
+menuApples = pygame.transform.scale(menuApples, (int(951 * scaleFactor), int(951 * scaleFactor)))
+menuClouds = pygame.transform.scale(menuClouds, (int(951 * scaleFactor), int(951 * scaleFactor)))
+menuEnter = pygame.transform.scale(menuEnter, (int(951 * scaleFactor), int(951 * scaleFactor)))
+menuTitle = pygame.transform.scale(menuTitle, (int(951 * scaleFactor), int(951 * scaleFactor)))
+
+# Center the images on the screen
+menuApplesRect = menuApples.get_rect(center=(windowWidth//2, windowHeight//2))
+menuCloudsRect = menuClouds.get_rect(center=(windowWidth//2, windowHeight//2))
+menuEnterRect = menuEnter.get_rect(center=(windowWidth//2, windowHeight//2))
+menuTitleRect = menuTitle.get_rect(center=(windowWidth//2, windowHeight//2))
+
+# Main menu function
+def mainMenu():
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
+                # Start the game loop
+                return
+            elif event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+        # Fill the screen with black color
+        windowScreen.fill(black)
+
+        # Draw the menu images
+        windowScreen.blit(menuBackground, (0, 0))
+        windowScreen.blit(menuApples, menuApplesRect)
+        windowScreen.blit(menuClouds, menuCloudsRect)
+        windowScreen.blit(menuEnter, menuEnterRect)
+        windowScreen.blit(menuTitle, menuTitleRect)
+
+        # Update the display
+        pygame.display.update()
+
+        # Set the frame rate
+        fps.tick(30)
+
+# Call the main menu function
+mainMenu()
 
 # Score function
 def totalScore(choice, color, font, size):
@@ -167,7 +218,7 @@ while True:
     for pos in snakeBody:
         pygame.draw.rect(windowScreen, pink, pygame.Rect(pos[0], pos[1], 10, 10))
         # Load apple image with alpha channel
-        appleImg = pygame.image.load('res/apple.png').convert_alpha() 
+        appleImg = pygame.image.load('res/Apple.png').convert_alpha() 
         # Scale down the apple image to 10x10 pixels
         appleImg = pygame.transform.scale(appleImg, (10, 10)) 
         # Draw the apple image on the screen
