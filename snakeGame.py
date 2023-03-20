@@ -27,7 +27,7 @@ pink = (231, 97, 247)
 fps = pygame.time.Clock()
  
 # Game Elements
-# Snake body ( first 3 blocks)
+# Snake body (first 3 blocks)
 snakeBody = [[100, 50], [90, 50], [80, 50]]
 # Default snake position
 snakePosition = [100, 50]
@@ -72,10 +72,17 @@ menuTitleRect = menuTitle.get_rect(center=(windowWidth//2, windowHeight//2))
 # Main menu function
 def mainMenu():
     while True:
+        # Main Menu Key Events
         for event in pygame.event.get():
+            # When the Enter key is pressed, start the game loop and exit the main menu
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                 # Start the game loop
                 return
+            # When the Escape key is pressed, quit the game and exit the main menu
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                pygame.quit()
+                sys.exit()
+            # If the user closes the game window, quit the game and exit the main menu
             elif event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
@@ -121,19 +128,19 @@ def gameOver():
     # Set the position of the image in the middle of the screen
     gameOverImgRect.center = (windowWidth/2, windowHeight/2)
     # Create a font object for the score
-    scoreeFont = pygame.font.SysFont('times new roman', 20)
+    finalScoreFont = pygame.font.SysFont('times new roman', 20)
     # Render the score text
-    scoreeSurface = scoreeFont.render('score: ' + str(score), True, white)
+    finalScoreSurface = finalScoreFont.render('score: ' + str(score), True, white)
     # Get the rect for the score text
-    scoreeRect = scoreeSurface.get_rect()
+    finalScoreRect = finalScoreSurface.get_rect()
     # Set the position of the score text below the image
-    scoreeRect.midtop = (windowWidth/2, gameOverImgRect.bottom + 20)
+    finalScoreRect.midtop = (windowWidth/2, gameOverImgRect.bottom + 20)
     # Fill the screen with black color
     windowScreen.fill(black)
     # Draw the image on the screen
     windowScreen.blit(gameOverImg, gameOverImgRect)
     # Draw the score text on the screen
-    windowScreen.blit(scoreeSurface, scoreeRect)
+    windowScreen.blit(finalScoreSurface, finalScoreRect)
     # Update the display
     pygame.display.flip()
     # Load the sound file
@@ -148,7 +155,6 @@ def gameOver():
 
 # Main function
 while True:
-
     # Key events
     # Arrow keys and WASD keys
     # ESC to exit
@@ -162,7 +168,7 @@ while True:
                 nextDirection = 'LEFT'
             elif event.key in (pygame.K_RIGHT, pygame.K_d):
                 nextDirection = 'RIGHT'
-            elif event.key == pygame.K_ESCAPE:
+            elif event.key in (pygame.K_ESCAPE):
                 pygame.quit()
                 sys.exit()
 
