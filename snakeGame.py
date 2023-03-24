@@ -7,9 +7,6 @@ import sys
 # Initialize all pygame modules
 pygame.init()
 
-# Initialize the mixer module
-pygame.mixer.init()
-
 # Game window setup
 windowWidth = 500
 windowHeight = 500
@@ -71,6 +68,10 @@ menuTitleRect = menuTitle.get_rect(center=(windowWidth//2, windowHeight//2))
 
 # Main menu function
 def mainMenu():
+    # Initial transparency value
+    alpha = 255
+    # The alpha change rate
+    alpha_change_rate = -8
     while True:
         # Main Menu Key Events
         for event in pygame.event.get():
@@ -94,8 +95,16 @@ def mainMenu():
         windowScreen.blit(menuBackground, (0, 0))
         windowScreen.blit(menuApples, menuApplesRect)
         windowScreen.blit(menuClouds, menuCloudsRect)
-        windowScreen.blit(menuEnter, menuEnterRect)
         windowScreen.blit(menuTitle, menuTitleRect)
+
+        # Adjust the MenuEnter transparency value
+        alpha += alpha_change_rate
+        if alpha >= 255 or alpha <= 100:
+            alpha_change_rate = -alpha_change_rate
+
+        # Set the MenuEnter transparency value
+        menuEnter.set_alpha(alpha)
+        windowScreen.blit(menuEnter, menuEnterRect)
 
         # Update the display
         pygame.display.update()
