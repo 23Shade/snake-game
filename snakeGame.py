@@ -68,6 +68,10 @@ menuTitleRect = menuTitle.get_rect(center=(windowWidth//2, windowHeight//2))
 
 # Main menu function
 def mainMenu():
+    # Load the main menu background song
+    main_menu_sound = pygame.mixer.Sound('res/MainMenuSound.mp3')
+    # Play the main menu background song in an infinite loop
+    main_menu_sound.play(loops=-1)
     # Initial transparency value
     alpha = 255
     # The alpha change rate
@@ -114,6 +118,8 @@ def mainMenu():
 
 # Call the main menu function
 mainMenu()
+# When exiting the main menu, stop the background song
+pygame.mixer.stop()
 
 # Score function
 def totalScore(choice, color, font, size):
@@ -156,6 +162,8 @@ def gameOver():
     gameOverSound = pygame.mixer.Sound('res/GameOverSound.mp3')
     # Play the sound
     gameOverSound.play()
+    # Print the score
+    print("Score:", score)
     # Wait for 3 seconds before quitting
     time.sleep(3)
     # Quit pygame and terminate the script
