@@ -8,8 +8,8 @@ import sys
 pygame.init()
 
 # Game window setup
-windowWidth = 500
-windowHeight = 500
+windowWidth = 600
+windowHeight = 600
 windowScreen = pygame.display.set_mode((windowWidth, windowHeight))
 pygame.display.set_caption('Snake Game by Shade')
 
@@ -170,9 +170,9 @@ def gameOver():
     pygame.quit()
     sys.exit()
 
-# Main function
-while True:
-    # Key events
+# Key events function
+def keyEvents():
+    global nextDirection
     # Arrow keys and WASD keys
     # ESC to exit
     for event in pygame.event.get():
@@ -189,7 +189,9 @@ while True:
                 pygame.quit()
                 sys.exit()
 
-    # Direction management                    
+# Direction management function
+def manageDirection():
+    global direction, nextDirection
     if nextDirection == 'UP' and direction != 'DOWN':
         direction = 'UP'
     elif nextDirection == 'DOWN' and direction != 'UP':
@@ -199,7 +201,9 @@ while True:
     elif nextDirection == 'RIGHT' and direction != 'LEFT':
         direction = 'RIGHT'
 
-    # Moving the Snake
+# Snake movement function
+def moveSnake():
+    global direction, snakePosition, snakeBody, fruitPosition, fruitSpawn, score
     # snakeMovement = 10
     # Y - coordinate decreases by 10px
     if direction == 'UP':
@@ -228,6 +232,9 @@ while True:
     else:
         snakeBody.pop()
 
+# Fruit spawn function
+def spawnFruit():
+    global fruitPosition, fruitSpawn, snakeBody
     # Finds a valid spawn for the fruit and prevents the fruit to spawn on the snake's body	
     if not fruitSpawn:
         fruitPosition = [random.randrange(1, (windowWidth//10)) * 10,
@@ -236,8 +243,10 @@ while True:
             fruitPosition = [random.randrange(1, (windowWidth//10)) * 10,
                             random.randrange(1, (windowHeight//10)) * 10]
     fruitSpawn = True
+
+# Object function
+def drawObject():
     windowScreen.fill(black)
-	
     for pos in snakeBody:
         pygame.draw.rect(windowScreen, pink, pygame.Rect(pos[0], pos[1], 10, 10))
         # Load apple image with alpha channel
@@ -246,9 +255,11 @@ while True:
         appleImg = pygame.transform.scale(appleImg, (10, 10)) 
         # Draw the apple image on the screen
         windowScreen.blit(appleImg, (fruitPosition[0], fruitPosition[1])) 
+        # Displays the score countinuously
+        totalScore(1, white, 'times new roman', 20)
 
-
-    # Game Over conditions
+# Game Over conditions function
+def checkGameOver():
     # Touching the edge of the screen (Wall Collision)
     if snakePosition[0] < 0 or snakePosition[0] > windowWidth-10:
         gameOver()
@@ -261,11 +272,19 @@ while True:
         if snakePosition[0] == block[0] and snakePosition[1] == block[1]:
             gameOver()
 
-    # displaying score countinuously
-    totalScore(1, white, 'times new roman', 20)
+# Main function
+def main():
+    while True:
+        keyEvents()
+        manageDirection()
+        moveSnake()
+        spawnFruit()
+        drawObject()
+        checkGameOver()
+        # Updates the entire pygame display
+        pygame.display.update()
+        # Maximum FPS allowed
+        fps.tick(difficulty)
 
-    # Updates the entire pygame display
-    pygame.display.update()
-
-    # Maximum FPS allowed
-    fps.tick(difficulty)
+if __name__ == '__main__':
+    main()
