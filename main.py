@@ -142,7 +142,7 @@ pygame.mixer.stop()
 # Score function
 def total_score(choice, color, font, size):
     # Creates a font object
-    score_font = pygame.font.SysFont(font, size)
+    score_font = pygame.font.Font('res/Pixel.ttf', 20)
     # Live score
     score_surface = score_font.render('Score : ' + str(score), True, color)
     # Rectangle object
@@ -157,8 +157,8 @@ def game_over():
     window_screen.blit(game_over_text, game_over_text_rect)
     window_screen.blit(game_over_apples, game_over_apples_rect)
     # Render the score text
-    font = pygame.font.SysFont(None, 20)
-    text = font.render(f"Score: {score}", True, white)
+    font = pygame.font.Font('res/Pixel.ttf', 20)
+    text = font.render(f"Score : {score}", True, white)
     text_rect = text.get_rect(center=(window_width//2, window_height//2 + 100))
     window_screen.blit(text, text_rect)
     # Load the sound file
@@ -166,7 +166,7 @@ def game_over():
     # Play the sound
     game_over_sound.play()
     # Print the score
-    print("Score:", score)
+    print(f"Score: {score}")
     # Update the display
     pygame.display.update()
     # Wait for 3 seconds before quitting
