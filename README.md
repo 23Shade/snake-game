@@ -57,11 +57,22 @@ A Python implementation of the classic Snake Game, built using the Pygame librar
 
 <!-- DEMO -->
 ## Demo
-|**Features**  |                      **Visuals**                         |
-| ------------ | ---------------------------------------------------------|
-| *Main Menu*  | <img src="assets/MainMenu.gif" width="300" height="300"> |
-| *Game*       | <img src="assets/Game.gif" width="300" height="300">     |
-| *Game Over*  | <img src="assets/GameOver.gif" width="300" height="300"> |
+|    Feature    |                          Visual                          |
+| ------------- | ---------------------------------------------------------|
+| *Main Menu*   | <img src="assets/MainMenu.gif" width="300" height="300"> |
+| *Game*        | <img src="assets/Game.gif" width="300" height="300">     |
+| *Game Over*   | <img src="assets/GameOver.gif" width="300" height="300"> |
+
+<!-- GAME CONTROLS -->
+## Game Controls
+|                 Key                 |     Action     |
+| ----------------------------------- | -------------- |
+| <kbd>Enter</kbd>                    | Start the game |
+| <kbd>Esc</kbd>                      | Exit the game  |
+| <kbd>&uarr;</kbd> / <kbd>W</kbd>    | Move Up        |
+| <kbd>&darr;</kbd> / <kbd>S</kbd>    | Move Down      |
+| <kbd>&larr;</kbd> / <kbd>A</kbd>    | Move Left      |
+| <kbd>&rarr;</kbd> / <kbd>D</kbd>    | Move Right     |
 
 <!-- URL -->
 <!-- STARS -->
