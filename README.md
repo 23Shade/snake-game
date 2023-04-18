@@ -20,6 +20,9 @@
     <li>
         <a href="#demo">Demo</a>
     </li>
+    <li>
+        <a href="#game-controls">Game Controls</a>
+    </li>
 </details>
 
 <!-- SNAKE-GAME -->
