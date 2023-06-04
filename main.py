@@ -12,6 +12,9 @@ window_width = 500
 window_height = 500
 window_screen = pygame.display.set_mode((window_width, window_height))
 pygame.display.set_caption('Snake Game by Shade')
+# Icon
+game_icon = pygame.image.load('res/Icon.png')
+pygame.display.set_icon(game_icon)
 
 # Colors
 # RGB tuples
@@ -38,8 +41,7 @@ difficulty = 20
 # Fruit spawn
 fruit_spawn = True
 # fruit position
-fruit_position = [random.randrange(1, (window_width//10)) * 10,
-				random.randrange(1, (window_height//10)) * 10]
+fruit_position = [random.randrange(1, (window_width//10)) * 10, random.randrange(1, (window_height//10)) * 10]
 # Initial Score
 score = 0
 
@@ -242,11 +244,9 @@ def spawn_fruit():
     global fruit_position, fruit_spawn, snake_body
     # Finds a valid spawn for the fruit and prevents the fruit to spawn on the snake's body	
     if not fruit_spawn:
-        fruit_position = [random.randrange(1, (window_width//10)) * 10,
-                        random.randrange(1, (window_height//10)) * 10]
+        fruit_position = [random.randrange(1, (window_width//10)) * 10, random.randrange(1, (window_height//10)) * 10]
         while fruit_position in snake_body:
-            fruit_position = [random.randrange(1, (window_width//10)) * 10,
-                            random.randrange(1, (window_height//10)) * 10]
+            fruit_position = [random.randrange(1, (window_width//10)) * 10, random.randrange(1, (window_height//10)) * 10]
     fruit_spawn = True
 
 # Object function
